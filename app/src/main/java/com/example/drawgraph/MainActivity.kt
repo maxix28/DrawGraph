@@ -14,6 +14,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.PaintingStyle.Companion.Stroke
 import androidx.compose.ui.graphics.drawscope.Stroke
@@ -32,7 +33,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+               MyApp()
                 }
             }
         }
@@ -61,7 +62,7 @@ Box(
 
     Canvas(
         modifier = Modifier
-            .padding(8.dp, top = 20.dp)
+            .padding(8.dp,)
             .aspectRatio(3/2f)
             .fillMaxSize()
 
@@ -70,7 +71,34 @@ Box(
         drawRect(Color.White, style = Stroke(barWidthPx))
 
 
-        
+
+        val verticalLines = 4
+        val verticalSize = size.width / (verticalLines+1)
+        repeat(verticalLines){ i->
+            val startX = verticalSize* ( i +1)
+            drawLine(
+                Color.White,
+                start = Offset(startX,0f),
+                end = Offset(startX, size.height),
+                strokeWidth = barWidthPx
+            )
+
+        }
+        val horizontallLnes = 3
+        val horizontalSize = size.height / (horizontallLnes+1)
+        repeat(horizontallLnes){ i->
+            val startY = horizontalSize* ( i +1)
+            drawLine(
+                Color.White,
+                start = Offset(0f,startY),
+                end = Offset( size.width,startY,),
+                strokeWidth = barWidthPx
+            )
+
+        }
+
+
+
 
     }
 
